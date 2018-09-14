@@ -3,6 +3,8 @@ const express = require('express');
 const hbs = require('hbs');
 var app = express();
 
+var port = process.env.PORT || 3000;
+
 hbs.registerPartials(__dirname +'/views/partials');
 app.set('view engine', hbs);
 
@@ -24,9 +26,9 @@ var log = `${now}: ${req.method}: ${req.url}`;
   next();
 });
 
-app.use((req, res, next)=>{
-  res.render('maintenance.hbs')
-});
+// app.use((req, res, next)=>{
+//   res.render('maintenance.hbs')
+// });
 
 app.get('/', (req, res) => {
   res.render('home.hbs',{
@@ -47,6 +49,6 @@ app.get('/bad', (req, res) => {
   });
 })
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
